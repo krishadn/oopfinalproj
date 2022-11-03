@@ -5,7 +5,9 @@
 package view;
 
 import controller.StudentController;
-
+import model.StudentModel;
+import java.util.Arrays;
+import javax.swing.JOptionPane;
 /**
  *
  * @author KPES
@@ -47,9 +49,9 @@ public class StudentView extends javax.swing.JFrame {
         cbYearLevel = new javax.swing.JComboBox<>();
         cbGender = new javax.swing.JComboBox<>();
         cbProgram = new javax.swing.JComboBox<>();
-        txtAge = new javax.swing.JTextField();
         txtStudentNo = new javax.swing.JLabel();
         btnAdd = new javax.swing.JButton();
+        spnrAge = new javax.swing.JSpinner();
         searchPane = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
         txtSearchSearch = new javax.swing.JTextField();
@@ -150,7 +152,7 @@ public class StudentView extends javax.swing.JFrame {
 
         cbProgram.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "BSCS", "BSIS", "BSIT", "BSEMC", "BSArch", "BSChemE", "BSCE", "BSCpE", "BSEE", "BSIE", "BSME", "BSA" }));
 
-        txtStudentNo.setText("2022-"+String.valueOf(sc.getInitStudentNo()));
+        txtStudentNo.setText("2022-"+String.valueOf(sc.getCurrentID()));
         txtStudentNo.setToolTipText("\"Student Number\"");
 
         btnAdd.setText("Add");
@@ -159,6 +161,8 @@ public class StudentView extends javax.swing.JFrame {
                 btnAddActionPerformed(evt);
             }
         });
+
+        spnrAge.setModel(new javax.swing.SpinnerNumberModel());
 
         javax.swing.GroupLayout addPaneLayout = new javax.swing.GroupLayout(addPane);
         addPane.setLayout(addPaneLayout);
@@ -191,10 +195,11 @@ public class StudentView extends javax.swing.JFrame {
                             .addComponent(jLabel5)
                             .addComponent(jLabel3))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(addPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtLastName)
-                            .addComponent(cbProgram, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtAge, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(addPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtLastName, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(addPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(spnrAge, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(cbProgram, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                     .addComponent(btnAdd))
                 .addContainerGap(88, Short.MAX_VALUE))
         );
@@ -217,7 +222,7 @@ public class StudentView extends javax.swing.JFrame {
                     .addComponent(jLabel4)
                     .addComponent(jLabel5)
                     .addComponent(cbYearLevel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtAge, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(spnrAge, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(addPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
@@ -226,7 +231,7 @@ public class StudentView extends javax.swing.JFrame {
                     .addComponent(cbProgram, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(35, 35, 35)
                 .addComponent(btnAdd)
-                .addContainerGap(46, Short.MAX_VALUE))
+                .addContainerGap(45, Short.MAX_VALUE))
         );
 
         mainPane.addTab("Add Student", addPane);
@@ -711,12 +716,41 @@ public class StudentView extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
-        int studentNo = Integer.parseInt(txtStudentNo.getText());
+        int studentNo = Integer.parseInt(Arrays.asList(txtStudentNo.getText().split("-")).get(1)); // Separate 2022 from id value
         String firstName = txtFirstName.getText();
         String lastName = txtLastName.getText();
-        int yearLevel = Integer.parseInt(cbYearLevel.getSelectedItem().toString()) ;
+        int yearLevel = Integer.parseInt(cbYearLevel.getSelectedItem().toString());
+        int age = (Integer) spnrAge.getValue();
+        String gender = cbGender.getSelectedItem().toString();
+        String program = cbProgram.getSelectedItem().toString();
         
+        String errors = "";
+        if (firstName.length() == 0) {
+            errors += " - firstName\n";
+        }
         
+        if (lastName.length() == 0) {
+            errors += " - lastName\n";
+        }
+        
+        if (age < 0) {
+            errors += " - age\n";
+        }
+        
+        if (errors.length() > 0) {
+            JOptionPane.showMessageDialog(null, errors, "Invalid fields", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
+        StudentModel student = new StudentModel(studentNo, firstName, lastName, yearLevel, age, gender, program);
+        sc.incrementID();
+        sc.createStudent(student);
+        // Reload view
+        sc.loadData();
+        txtStudentNo.setText("2022-"+String.valueOf(sc.getCurrentID()));
+        // Clear first name and last name, other fields can be reused
+        txtFirstName.setText("");
+        txtLastName.setText("");
     }//GEN-LAST:event_btnAddActionPerformed
 
     /**
@@ -822,7 +856,7 @@ public class StudentView extends javax.swing.JFrame {
     private javax.swing.JList<String> listRes;
     private javax.swing.JTabbedPane mainPane;
     private javax.swing.JPanel searchPane;
-    private javax.swing.JTextField txtAge;
+    private javax.swing.JSpinner spnrAge;
     private javax.swing.JLabel txtAgeDel;
     private javax.swing.JTextField txtAgeUpd;
     private javax.swing.JLabel txtAgeView;
