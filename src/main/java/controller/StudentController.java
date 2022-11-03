@@ -120,11 +120,8 @@ public class StudentController {
             }               
         return result;    
     }
-    
-    
-    
-    
-    
+
+
     public void createStudent(StudentModel student) {
         System.out.println(student.toString());
         System.out.println(contents.size());
