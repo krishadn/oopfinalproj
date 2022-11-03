@@ -27,21 +27,29 @@ public class StudentController {
     private BufferedReader reader;
     private BufferedWriter writer;
     private final int initStudentNo;  
+    public int nextID;
 
     public StudentController() {
         this.curModel = new StudentModel();
         this.contents = new ArrayList<>();
+        loadData();
+        if(contents.isEmpty()){
+            this.initStudentNo = 1;
+        } else {
+            this.initStudentNo = (contents.get(contents.size()-1).getStudentNo()) + 1;
+        }
+    }
+    
+    public void loadData() {
         try {
-            this.reader = null;
-            this.reader = new BufferedReader(new FileReader("tester.csv"));
+            this.reader = new BufferedReader(new FileReader("resources/student.csv"));
             String line;
             int flag = 0;
+            this.nextID = Integer.parseInt(new BufferedReader(new FileReader("resources/idCounter.txt")).readLine());
             while((line = reader.readLine()) != null){
                 StudentModel entry = new StudentModel();
                 if (flag == 0){
-                    System.out.println("Inside array initialization");
-                    flag += 1;
-                    // TODO add codes for column header
+                    // Do nothing for header columns
                 } else {
                     String[] temp = line.split(",");                  
                     entry.setStudentNo(Integer.parseInt(temp[0]));    //student no.
@@ -51,10 +59,9 @@ public class StudentController {
                     entry.setAge(Integer.parseInt(temp[4]));    //age
                     entry.setGender(temp[5]);                     //gender
                     entry.setProgram(temp[6]);                     //program
-                
                     contents.add(entry);
-                    System.out.println(entry.toString());
-                }                  
+                }
+                flag++;
             }           
         } catch (FileNotFoundException ex) {
             Logger.getLogger(StudentController.class.getName()).log(Level.SEVERE, null, ex);
@@ -63,61 +70,54 @@ public class StudentController {
         }  finally {
             try {
                 if (reader != null){
-                     reader.close();
+                    reader.close();
                 }
             } catch (IOException ex) {
                 Logger.getLogger(StudentController.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-        
-//        try {
-//            this.writer = null;
-//            this.writer = new BufferedWriter(new FileWriter("tester.csv"));
-//        } catch (IOException ex) {
-//            Logger.getLogger(StudentController.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-        if(contents.isEmpty()){
-            this.initStudentNo = 1;
-        } else {
-            this.initStudentNo = (contents.get(contents.size()-1).getStudentNo()) + 1;
-        }             
     }
 
     public int getInitStudentNo() {
         return initStudentNo;
     }
     
+    public int getCurrentID() {
+        return this.nextID;
+    }
     
-    public ArrayList<String> search(String inp){
-        String[] names = inp.split(" ");
-        String regex  = "^[a-zA-Z]*";
-        for(String name: names){
-            regex = regex.concat(name+ " ");
-            
+    public void incrementID() {
+        try {
+            String nextNum = Integer.toString(this.nextID++);
+            // Creates a FileWriter
+            FileWriter file = new FileWriter("resources/idCounter.txt");
+
+            // Writes the string to the file
+            // Creates a BufferedWriter
+            try (BufferedWriter output = new BufferedWriter(file)) {
+                // Writes the string to the file
+                output.write(nextNum);
+            }
+        } catch (IOException ex) {
+            Logger.getLogger(StudentController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        
-        String regexSep = ("^[a-zA-Z]*" + inp + "[a-zA-Z]*$");
-        String regexFull = ("^[a-zA-Z]*" + inp + "[a-zA-Z]*$");
-        Pattern pattern = Pattern.compile(regexSep, Pattern.CASE_INSENSITIVE);
+    }
+    
+    public ArrayList<String> searchRegex(String inp){
         ArrayList<String> result = new ArrayList<>();
-        for (StudentModel student: contents){
-            String firstName = student.getFirstName();
-            if(firstName.contains(" ")){
-                String[] sepFirstName
-            }
+        String regex = ("^[a-zA-Z\\s]*" + inp + "[a-zA-Z\\s]*$");
+            Pattern pattern = Pattern.compile(regex, Pattern.CASE_INSENSITIVE);
+            for (StudentModel student: contents){
+                String fullName = student.getFirstName() + " " + student.getLastName();
+                int studentNo = student.getStudentNo();
             
-            String lastName = student.getLastName();
-            int studentNo = student.getStudentNo();
+                Matcher mtFullName = pattern.matcher(fullName);
             
-            Matcher mtFirstName = pattern.matcher(firstName);
-            Matcher mtLastName = pattern.matcher(lastName);
-            
-            if(mtFirstName.matches() || mtLastName.matches()){
-                String studentDet = String.format("Student no. 2022-%d: %s %s", studentNo,  firstName, lastName);
-                result.add(studentDet);
-            }
-        }        
+                if(mtFullName.find()){
+                    String studentDet = String.format("Student no. 2022-%d: %s", studentNo,  fullName);
+                    result.add(studentDet);
+                }
+            }               
         return result;    
     }
     
@@ -125,6 +125,27 @@ public class StudentController {
     
     
     
-    
-    
+    public void createStudent(StudentModel student) {
+        System.out.println(student.toString());
+        System.out.println(contents.size());
+        try {
+            // Creates a FileWriter
+            FileWriter studentsFile = new FileWriter("resources/student.csv", true); // Second parameter is append
+            FileWriter idCounterFile = new FileWriter("resources/idCounter.txt");
+            
+            // Append new row
+            // Creates a BufferedWriter
+            try (BufferedWriter output = new BufferedWriter(studentsFile)) {
+                // Append new row
+                output.write("\n" + student.toFormattedCSVRow());
+            }
+            
+            try (BufferedWriter output = new BufferedWriter(idCounterFile)) {
+                // Append new row
+                output.write(Integer.toString(this.getCurrentID()));
+            }
+        } catch (IOException ex) {
+            Logger.getLogger(StudentController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 }
