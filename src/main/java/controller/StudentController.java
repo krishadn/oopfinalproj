@@ -14,6 +14,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  *
@@ -101,7 +103,25 @@ public class StudentController {
         }
     }
     
-    
+    public ArrayList<String> searchRegex(String inp){
+        ArrayList<String> result = new ArrayList<>();
+        String regex = ("^[a-zA-Z\\s]*" + inp + "[a-zA-Z\\s]*$");
+            Pattern pattern = Pattern.compile(regex, Pattern.CASE_INSENSITIVE);
+            for (StudentModel student: contents){
+                String fullName = student.getFirstName() + " " + student.getLastName();
+                int studentNo = student.getStudentNo();
+            
+                Matcher mtFullName = pattern.matcher(fullName);
+            
+                if(mtFullName.find()){
+                    String studentDet = String.format("Student no. 2022-%d: %s", studentNo,  fullName);
+                    result.add(studentDet);
+                }
+            }               
+        return result;    
+    }
+
+
     public void createStudent(StudentModel student) {
         System.out.println(student.toString());
         System.out.println(contents.size());
