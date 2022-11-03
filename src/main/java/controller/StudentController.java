@@ -12,6 +12,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
@@ -120,8 +121,43 @@ public class StudentController {
             }               
         return result;    
     }
-
-
+    
+    public String[] searchStudent(String viewBy, String inp){
+        String[] studentDetails = new String[7];
+        Arrays.fill(studentDetails, null);
+        if(viewBy.equals("Student no.")){
+            int number = Integer.parseInt(inp);
+            for(StudentModel student: contents){
+                if(student.getStudentNo() == number){
+                    studentDetails[0] = String.valueOf(student.getStudentNo());
+                    studentDetails[1] = student.getFirstName();
+                    studentDetails[2] = student.getLastName();
+                    studentDetails[3] = String.valueOf(student.getYearLevel());
+                    studentDetails[4] = String.valueOf(student.getAge());
+                    studentDetails[5] = student.getGender();
+                    studentDetails[6] = student.getProgram();
+                    break;
+                }
+                
+            }
+        } else if (viewBy.equals("Last name")){
+            for(StudentModel student: contents){
+                if(student.getLastName().equalsIgnoreCase(inp.trim())){
+                    studentDetails[0] = String.valueOf(student.getStudentNo());
+                    studentDetails[1] = student.getFirstName();
+                    studentDetails[2] = student.getLastName();
+                    studentDetails[3] = String.valueOf(student.getYearLevel());
+                    studentDetails[4] = String.valueOf(student.getAge());
+                    studentDetails[5] = student.getGender();
+                    studentDetails[6] = student.getProgram();
+                    break;
+                }                
+            }
+        }        
+        return studentDetails;
+    }
+    
+    
     public void createStudent(StudentModel student) {
         System.out.println(student.toString());
         System.out.println(contents.size());
