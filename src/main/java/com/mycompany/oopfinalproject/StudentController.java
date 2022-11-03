@@ -71,9 +71,9 @@ public class StudentController {
             Logger.getLogger(StudentController.class.getName()).log(Level.SEVERE, null, ex);
         }
         if(contents.isEmpty()){
-            this.initStudentNo = 0;
+            this.initStudentNo = 1;
         } else {
-            this.initStudentNo = contents.get(contents.size()-1).getStudentNo();
+            this.initStudentNo = (contents.get(contents.size()-1).getStudentNo()) + 1;
         }             
     }
 
