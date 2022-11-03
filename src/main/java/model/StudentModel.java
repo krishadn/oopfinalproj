@@ -34,6 +34,18 @@ public class StudentModel {
     public String toString() {
         return "EmployeeModel{" + "studentNo=" + studentNo + ", firstName=" + firstName + ", lastName=" + lastName + ", yearLevel=" + yearLevel + ", age=" + age + ", gender=" + gender + ", program=" + program + '}';
     }
+    
+    public String toFormattedCSVRow() {
+        return String.format(
+                this.studentNo + "," +
+                this.firstName + "," +
+                this.lastName + "," +
+                this.yearLevel + "," +
+                this.age + "," +
+                this.gender + "," +
+                this.program
+        );
+    }
 
     public int getStudentNo() {
         return studentNo;
