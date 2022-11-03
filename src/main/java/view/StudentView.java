@@ -9,6 +9,8 @@ import model.StudentModel;
 import java.util.Arrays;
 import javax.swing.JOptionPane;
 import java.util.ArrayList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.swing.DefaultListModel;
 
 /**
@@ -317,6 +319,11 @@ public class StudentView extends javax.swing.JFrame {
         jLabel12.setText("Student details");
 
         btnSearchView.setText("Search");
+        btnSearchView.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSearchViewActionPerformed(evt);
+            }
+        });
 
         jLabel23.setText("First name");
 
@@ -347,6 +354,11 @@ public class StudentView extends javax.swing.JFrame {
         txtStudentNoView.setText("2022-");
 
         btnClearView.setText("Clear");
+        btnClearView.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnClearViewActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout viewPaneLayout = new javax.swing.GroupLayout(viewPane);
         viewPane.setLayout(viewPaneLayout);
@@ -768,15 +780,79 @@ public class StudentView extends javax.swing.JFrame {
 
     private void btnSearchSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchSearchActionPerformed
         String input = txtSearchSearch.getText();
-        ArrayList<String> result = sc.searchRegex(input);
-        DefaultListModel listModel = new DefaultListModel();
-        listModel.addAll(result);
-        listRes.setModel(listModel);
+        if(input.isEmpty()){
+            JOptionPane.showMessageDialog(null, "Search box empty", "Input Error", JOptionPane.ERROR_MESSAGE);
+        } else {
+            ArrayList<String> result = sc.searchRegex(input);
+            DefaultListModel listModel = new DefaultListModel();
+            if(result.isEmpty()){
+                listModel.addElement("NO RESULT");
+            } else {
+                listModel.addAll(result);
+            }
+            listRes.setModel(listModel);
+        }
+                   
     }//GEN-LAST:event_btnSearchSearchActionPerformed
 
     private void btnClearSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearSearchActionPerformed
         listRes.setModel(new DefaultListModel());
     }//GEN-LAST:event_btnClearSearchActionPerformed
+
+    private void btnSearchViewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchViewActionPerformed
+        int searchComp = 0;
+        String opt = cbViewOptView.getSelectedItem().toString();
+        String query = txtSearchView.getText();
+        String[] result = new String[7];
+        
+        if (opt.equals("Student no.")){
+            // For Input Validation
+             Pattern pattern = Pattern.compile("2022-\\d+");
+             Matcher m = pattern.matcher(query);
+             
+             if(m.matches()){
+                 String[] revQuery = query.split("-"); //2022-#             
+                 result = sc.searchStudent(opt, revQuery[1]);
+                 searchComp = 1;
+             } else {
+                 JOptionPane.showMessageDialog(null, "Invalid student number", "Input Error", JOptionPane.ERROR_MESSAGE);
+             }
+             
+        } else {
+            result = sc.searchStudent(opt, query);
+            searchComp = 1;
+        }
+       
+       if(result[0] == null && searchComp == 1){
+           JOptionPane.showMessageDialog(null, "No Result", "Search Result", JOptionPane.INFORMATION_MESSAGE);
+           txtStudentNoView.setText("2022-");
+           txtFirstNameView.setText("----------");
+           txtLastNameView.setText("----------");
+           txtYearlLevelView.setText("----------");
+           txtAgeView.setText("----------");
+           txtGenderView.setText("----------");
+           txtProgramView.setText("----------");
+       } else if (searchComp == 1){
+           txtStudentNoView.setText("2022-"+result[0]);
+           txtFirstNameView.setText(result[1]);
+           txtLastNameView.setText(result[2]);
+           txtYearlLevelView.setText(result[3]);
+           txtAgeView.setText(result[4]);
+           txtGenderView.setText(result[5]);
+           txtProgramView.setText(result[6]);
+       }      
+    }//GEN-LAST:event_btnSearchViewActionPerformed
+
+    private void btnClearViewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearViewActionPerformed
+        txtStudentNoView.setText("2022-");
+        txtFirstNameView.setText("----------");
+        txtLastNameView.setText("----------");
+        txtYearlLevelView.setText("----------");
+        txtAgeView.setText("----------");
+        txtGenderView.setText("----------");
+        txtProgramView.setText("----------");
+        txtSearchView.setText("");
+    }//GEN-LAST:event_btnClearViewActionPerformed
 
     /**
      * @param args the command line arguments
