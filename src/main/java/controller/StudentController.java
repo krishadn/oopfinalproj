@@ -158,9 +158,6 @@ public class StudentController {
     }
     
     
-    
-    
-    
     public void createStudent(StudentModel student) {
         System.out.println(student.toString());
         System.out.println(contents.size());
