@@ -142,16 +142,21 @@ public class StudentView extends javax.swing.JFrame {
 
         jLabel7.setText("Program");
 
-        cbYearLevel.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1st year", "2nd year", "3rd year", "4th year", "5th year" }));
+        cbYearLevel.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5" }));
 
         cbGender.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Female", "Male", "Non-binary" }));
 
         cbProgram.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "BSCS", "BSIS", "BSIT", "BSEMC", "BSArch", "BSChemE", "BSCE", "BSCpE", "BSEE", "BSIE", "BSME", "BSA" }));
 
-        txtStudentNo.setText(String.valueOf(sc.getInitStudentNo()));
+        txtStudentNo.setText("2022-"+String.valueOf(sc.getInitStudentNo()));
         txtStudentNo.setToolTipText("\"Student Number\"");
 
         btnAdd.setText("Add");
+        btnAdd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout addPaneLayout = new javax.swing.GroupLayout(addPane);
         addPane.setLayout(addPaneLayout);
@@ -231,7 +236,7 @@ public class StudentView extends javax.swing.JFrame {
         jLabel9.setText("Results");
 
         listRes.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            String[] strings = {};
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
@@ -319,7 +324,7 @@ public class StudentView extends javax.swing.JFrame {
 
         jLabel35.setText("Student no.");
 
-        txtStudentNoView.setText("0000000000");
+        txtStudentNoView.setText("2022-");
 
         btnClearView.setText("Clear");
 
@@ -449,7 +454,7 @@ public class StudentView extends javax.swing.JFrame {
 
         cbProgramUpd.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
-        txtStudentNoUpd.setText("0000000000");
+        txtStudentNoUpd.setText("2022-");
 
         btnSearchUpd.setText("Search");
 
@@ -585,7 +590,7 @@ public class StudentView extends javax.swing.JFrame {
 
         jLabel52.setText("Student no.");
 
-        txtStudentNoDel.setText("0000000000");
+        txtStudentNoDel.setText("2022-");
 
         btnDelete.setText("Delete");
 
@@ -702,6 +707,15 @@ public class StudentView extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
+        int studentNo = Integer.parseInt(txtStudentNo.getText());
+        String firstName = txtFirstName.getText();
+        String lastName = txtLastName.getText();
+        int yearLevel = Integer.parseInt(cbYearLevel.getSelectedItem().toString()) ;
+        
+        
+    }//GEN-LAST:event_btnAddActionPerformed
 
     /**
      * @param args the command line arguments
