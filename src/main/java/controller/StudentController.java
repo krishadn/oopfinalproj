@@ -14,6 +14,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  *
@@ -31,12 +33,14 @@ public class StudentController {
         this.contents = new ArrayList<>();
         try {
             this.reader = null;
-            this.reader = new BufferedReader(new FileReader("student.csv"));
+            this.reader = new BufferedReader(new FileReader("tester.csv"));
             String line;
             int flag = 0;
             while((line = reader.readLine()) != null){
                 StudentModel entry = new StudentModel();
                 if (flag == 0){
+                    System.out.println("Inside array initialization");
+                    flag += 1;
                     // TODO add codes for column header
                 } else {
                     String[] temp = line.split(",");                  
@@ -49,6 +53,7 @@ public class StudentController {
                     entry.setProgram(temp[6]);                     //program
                 
                     contents.add(entry);
+                    System.out.println(entry.toString());
                 }                  
             }           
         } catch (FileNotFoundException ex) {
@@ -65,12 +70,12 @@ public class StudentController {
             }
         }
         
-        try {
-            this.writer = null;
-            this.writer = new BufferedWriter(new FileWriter("student.csv"));
-        } catch (IOException ex) {
-            Logger.getLogger(StudentController.class.getName()).log(Level.SEVERE, null, ex);
-        }
+//        try {
+//            this.writer = null;
+//            this.writer = new BufferedWriter(new FileWriter("tester.csv"));
+//        } catch (IOException ex) {
+//            Logger.getLogger(StudentController.class.getName()).log(Level.SEVERE, null, ex);
+//        }
         if(contents.isEmpty()){
             this.initStudentNo = 1;
         } else {
@@ -81,6 +86,42 @@ public class StudentController {
     public int getInitStudentNo() {
         return initStudentNo;
     }
+    
+    
+    public ArrayList<String> search(String inp){
+        String[] names = inp.split(" ");
+        String regex  = "^[a-zA-Z]*";
+        for(String name: names){
+            regex = regex.concat(name+ " ");
+            
+        }
+        
+        
+        String regexSep = ("^[a-zA-Z]*" + inp + "[a-zA-Z]*$");
+        String regexFull = ("^[a-zA-Z]*" + inp + "[a-zA-Z]*$");
+        Pattern pattern = Pattern.compile(regexSep, Pattern.CASE_INSENSITIVE);
+        ArrayList<String> result = new ArrayList<>();
+        for (StudentModel student: contents){
+            String firstName = student.getFirstName();
+            if(firstName.contains(" ")){
+                String[] sepFirstName
+            }
+            
+            String lastName = student.getLastName();
+            int studentNo = student.getStudentNo();
+            
+            Matcher mtFirstName = pattern.matcher(firstName);
+            Matcher mtLastName = pattern.matcher(lastName);
+            
+            if(mtFirstName.matches() || mtLastName.matches()){
+                String studentDet = String.format("Student no. 2022-%d: %s %s", studentNo,  firstName, lastName);
+                result.add(studentDet);
+            }
+        }        
+        return result;    
+    }
+    
+    
     
     
     

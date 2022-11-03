@@ -5,6 +5,8 @@
 package view;
 
 import controller.StudentController;
+import java.util.ArrayList;
+import javax.swing.DefaultListModel;
 
 /**
  *
@@ -234,6 +236,11 @@ public class StudentView extends javax.swing.JFrame {
         jLabel8.setText("Name");
 
         btnSearchSearch.setText("Search");
+        btnSearchSearch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSearchSearchActionPerformed(evt);
+            }
+        });
 
         jLabel9.setText("Results");
 
@@ -245,6 +252,11 @@ public class StudentView extends javax.swing.JFrame {
         jScrollPane2.setViewportView(listRes);
 
         btnClearSearch.setText("Clear");
+        btnClearSearch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnClearSearchActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout searchPaneLayout = new javax.swing.GroupLayout(searchPane);
         searchPane.setLayout(searchPaneLayout);
@@ -718,6 +730,18 @@ public class StudentView extends javax.swing.JFrame {
         
         
     }//GEN-LAST:event_btnAddActionPerformed
+
+    private void btnSearchSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchSearchActionPerformed
+        String input = txtSearchSearch.getText();
+        ArrayList<String> result = sc.search(input);
+        DefaultListModel listModel = new DefaultListModel();
+        listModel.addAll(result);
+        listRes.setModel(listModel);
+    }//GEN-LAST:event_btnSearchSearchActionPerformed
+
+    private void btnClearSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearSearchActionPerformed
+        listRes.setModel(new DefaultListModel());
+    }//GEN-LAST:event_btnClearSearchActionPerformed
 
     /**
      * @param args the command line arguments
