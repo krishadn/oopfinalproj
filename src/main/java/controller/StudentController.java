@@ -209,5 +209,36 @@ public class StudentController {
             Logger.getLogger(StudentController.class.getName()).log(Level.SEVERE, null, ex);
             return false;
         }     
+    }
+
+
+    public boolean deleteStudent(int studentNo){
+        ArrayList<String> entries = new ArrayList<>();
+        entries.add(header);
+                
+        for(StudentModel student: contents){
+            if(student.getStudentNo() == studentNo){
+                try (BufferedWriter deletedFile = new BufferedWriter(new FileWriter("resources/deleted.csv", true))){
+                    deletedFile.write("\n" + student.toFormattedCSVRow());                   
+                } catch (IOException ex) {
+                    Logger.getLogger(StudentController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                
+            } else {
+                entries.add("\n" + student.toFormattedCSVRow());
+            }
+        }
+        try {
+            FileWriter studentsFile = new FileWriter("resources/student.csv");
+            try (BufferedWriter output = new BufferedWriter(studentsFile)) {
+               for(String entry: entries){
+                output.write(entry);
+                }
+               return true;
+            }
+        } catch (IOException ex) {
+            Logger.getLogger(StudentController.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
+        }         
     }    
 }
