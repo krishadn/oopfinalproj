@@ -1036,8 +1036,8 @@ public class StudentView extends javax.swing.JFrame {
                 + "Created by:<br>"
                 + "<font style=\"font-weight: bold;\">HIJE</font>, Jericho<br>"
                 + "<font style=\"font-weight: bold;\">MARTINEZ</font>, Sebastian Gabriel E.<br>"
-                + "<font style=\"font-weight: bold;\">SANTILLAN</font>, Krizzia Pearl E.<br>"
-                + "<font style=\"font-weight: bold;\">PAULINO</font>, Selwyn<br><br>"
+                + "<font style=\"font-weight: bold;\">PAULINO</font>, Selwyn<br>"
+                + "<font style=\"font-weight: bold;\">SANTILLAN</font>, Krizzia Pearl E.<br><br>"
                 + "<p>"
                 + "A simple application for managing student information.<br><br>"
                 + "For educational purposes only."
@@ -1100,7 +1100,8 @@ public class StudentView extends javax.swing.JFrame {
         if(txtFirstNameDel.getText().equals("----------") || txtLastNameDel.getText().equals("----------")){
             JOptionPane.showMessageDialog(null, "No student selected", "Input error", JOptionPane.ERROR_MESSAGE);
 	} else {
-            int confirm = JOptionPane.showConfirmDialog(null, "Confirm deletion?");
+            int confirm = JOptionPane.showConfirmDialog(null, "Confirm deletion?", "Delete Student Record", JOptionPane.YES_NO_OPTION,
+                JOptionPane.QUESTION_MESSAGE);
             if(confirm == 0){
                 int studentNo = Integer.parseInt(Arrays.asList(txtStudentNoDel.getText().split("-")).get(1));
                 if (sc.deleteStudent(studentNo)){
