@@ -1,4 +1,4 @@
 studentNo, firstName, lastName, yearLevel, age, gender, program
 1,Sample,Name,3,22,Male,BSCS
-2,Peter,Parker,3,23,Male,BSArch
-3,Risa,Hontiveros,5,25,Female,BSCE
+3,Peter,Parker,3,23,Male,BSArch
+5,Risa,Hontiveros,5,25,Female,BSCE
