@@ -827,6 +827,7 @@ public class StudentView extends javax.swing.JFrame {
         // Clear first name and last name, other fields can be reused
         txtFirstName.setText("");
         txtLastName.setText("");
+        JOptionPane.showMessageDialog(this, "Student successfully added", "Add", JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_btnAddActionPerformed
 
     private void btnSearchSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchSearchActionPerformed
