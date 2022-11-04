@@ -134,8 +134,15 @@ public class StudentView extends javax.swing.JFrame {
         jLabel52 = new javax.swing.JLabel();
         txtStudentNoDel = new javax.swing.JLabel();
         btnDelete = new javax.swing.JButton();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
+        jMenuItem2 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("TIP Student Record");
+        setPreferredSize(new java.awt.Dimension(650, 400));
+        setResizable(false);
 
         jLabel1.setText("Student no.");
 
@@ -167,7 +174,7 @@ public class StudentView extends javax.swing.JFrame {
             }
         });
 
-        spnrAge.setModel(new javax.swing.SpinnerNumberModel());
+        spnrAge.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 1));
 
         javax.swing.GroupLayout addPaneLayout = new javax.swing.GroupLayout(addPane);
         addPane.setLayout(addPaneLayout);
@@ -206,7 +213,7 @@ public class StudentView extends javax.swing.JFrame {
                                 .addComponent(spnrAge, javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(cbProgram, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                     .addComponent(btnAdd))
-                .addContainerGap(88, Short.MAX_VALUE))
+                .addContainerGap(120, Short.MAX_VALUE))
         );
         addPaneLayout.setVerticalGroup(
             addPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -236,7 +243,7 @@ public class StudentView extends javax.swing.JFrame {
                     .addComponent(cbProgram, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(35, 35, 35)
                 .addComponent(btnAdd)
-                .addContainerGap(45, Short.MAX_VALUE))
+                .addContainerGap(87, Short.MAX_VALUE))
         );
 
         mainPane.addTab("Add Student", addPane);
@@ -287,7 +294,7 @@ public class StudentView extends javax.swing.JFrame {
                             .addGroup(searchPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(jLabel9)
                                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 521, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addContainerGap(46, Short.MAX_VALUE))))
+                        .addContainerGap(78, Short.MAX_VALUE))))
         );
         searchPaneLayout.setVerticalGroup(
             searchPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -305,7 +312,7 @@ public class StudentView extends javax.swing.JFrame {
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnClearSearch)
-                .addContainerGap(21, Short.MAX_VALUE))
+                .addContainerGap(62, Short.MAX_VALUE))
         );
 
         mainPane.addTab("Search Student", searchPane);
@@ -411,7 +418,7 @@ public class StudentView extends javax.swing.JFrame {
                                 .addComponent(jLabel26)
                                 .addGap(18, 18, 18)
                                 .addComponent(txtLastNameView)))))
-                .addContainerGap(36, Short.MAX_VALUE))
+                .addContainerGap(68, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, viewPaneLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnClearView)
@@ -455,7 +462,7 @@ public class StudentView extends javax.swing.JFrame {
                     .addComponent(txtProgramView))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnClearView)
-                .addContainerGap(22, Short.MAX_VALUE))
+                .addContainerGap(63, Short.MAX_VALUE))
         );
 
         mainPane.addTab("View Student", viewPane);
@@ -556,7 +563,7 @@ public class StudentView extends javax.swing.JFrame {
                                             .addComponent(spnrAgeUpd, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
                                         .addGap(90, 90, 90))))
                             .addComponent(txtStudentNoUpd))))
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addContainerGap(52, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, updatePaneLayout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(btnUpdate)
@@ -598,7 +605,7 @@ public class StudentView extends javax.swing.JFrame {
                     .addComponent(cbProgramUpd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(btnUpdate)
-                .addContainerGap(21, Short.MAX_VALUE))
+                .addContainerGap(62, Short.MAX_VALUE))
         );
 
         mainPane.addTab("Update Student", updatePane);
@@ -694,7 +701,7 @@ public class StudentView extends javax.swing.JFrame {
                                 .addComponent(jLabel43)
                                 .addGap(18, 18, 18)
                                 .addComponent(txtLastNameDel)))))
-                .addContainerGap(36, Short.MAX_VALUE))
+                .addContainerGap(68, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, deletePaneLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnDelete)
@@ -738,23 +745,50 @@ public class StudentView extends javax.swing.JFrame {
                     .addComponent(txtProgramDel))
                 .addGap(18, 18, 18)
                 .addComponent(btnDelete)
-                .addContainerGap(16, Short.MAX_VALUE))
+                .addContainerGap(57, Short.MAX_VALUE))
         );
 
         mainPane.addTab("Delete Student", deletePane);
+
+        jMenu1.setText("File");
+
+        jMenuItem1.setText("About");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                aboutMenuItemActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem1);
+
+        jMenuItem2.setText("Exit");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                exitMenuItemActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem2);
+
+        jMenuBar1.add(jMenu1);
+
+        setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(mainPane)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(mainPane, javax.swing.GroupLayout.PREFERRED_SIZE, 623, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(mainPane, javax.swing.GroupLayout.PREFERRED_SIZE, 302, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(mainPane, javax.swing.GroupLayout.PREFERRED_SIZE, 343, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
@@ -948,6 +982,33 @@ public class StudentView extends javax.swing.JFrame {
         }        
     }//GEN-LAST:event_btnUpdateActionPerformed
 
+    private void exitMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitMenuItemActionPerformed
+        // TODO add your handling code here:
+        int result = JOptionPane.showConfirmDialog(this, "Are you sure you want to exit?", "Exit Application",
+                JOptionPane.YES_NO_OPTION,
+                JOptionPane.QUESTION_MESSAGE);
+        if (result == JOptionPane.YES_OPTION) {
+            System.exit(0);
+        }
+    }//GEN-LAST:event_exitMenuItemActionPerformed
+
+    private void aboutMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aboutMenuItemActionPerformed
+        // TODO add your handling code here:
+        String aboutMsg = "<html>"
+                + "CCS 203-CS21FA1 Final Project<br>"
+                + "Created by:<br>"
+                + "<font style=\"font-weight: bold;\">HIJE</font>, Jericho<br>"
+                + "<font style=\"font-weight: bold;\">MARTINEZ</font>, Sebastian Gabriel E.<br>"
+                + "<font style=\"font-weight: bold;\">SANTILLAN</font>, Krizzia Pearl E.<br>"
+                + "<font style=\"font-weight: bold;\">PAULINO</font>, Selwyn<br><br>"
+                + "<p>"
+                + "A simple application for managing student information.<br><br>"
+                + "For educational purposes only."
+                + "</p>"
+                + "</html>";
+        JOptionPane.showMessageDialog(this, aboutMsg, "About", JOptionPane.INFORMATION_MESSAGE);
+    }//GEN-LAST:event_aboutMenuItemActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1043,6 +1104,10 @@ public class StudentView extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
