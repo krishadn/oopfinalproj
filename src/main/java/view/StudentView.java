@@ -105,12 +105,12 @@ public class StudentView extends javax.swing.JFrame {
         cbYearLevelUpd = new javax.swing.JComboBox<>();
         cbGenderUpd = new javax.swing.JComboBox<>();
         jLabel20 = new javax.swing.JLabel();
-        txtAgeUpd = new javax.swing.JTextField();
         jLabel21 = new javax.swing.JLabel();
         cbProgramUpd = new javax.swing.JComboBox<>();
         txtStudentNoUpd = new javax.swing.JLabel();
         btnSearchUpd = new javax.swing.JButton();
         btnUpdate = new javax.swing.JButton();
+        spnrAgeUpd = new javax.swing.JSpinner();
         deletePane = new javax.swing.JPanel();
         jLabel37 = new javax.swing.JLabel();
         cbViewOptDel = new javax.swing.JComboBox<>();
@@ -462,7 +462,7 @@ public class StudentView extends javax.swing.JFrame {
 
         jLabel13.setText("Search by");
 
-        cbViewOptUpd.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbViewOptUpd.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Student no.", "Last name" }));
 
         jLabel14.setText("Last name/Student no.");
 
@@ -476,21 +476,33 @@ public class StudentView extends javax.swing.JFrame {
 
         jLabel19.setText("Last name");
 
-        cbYearLevelUpd.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbYearLevelUpd.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5" }));
 
-        cbGenderUpd.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbGenderUpd.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Female", "Male", "Non-binary" }));
 
         jLabel20.setText("Age");
 
         jLabel21.setText("Program");
 
-        cbProgramUpd.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbProgramUpd.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "BSCS", "BSIS", "BSIT", "BSEMC", "BSArch", "BSChemE", "BSCE", "BSCpE", "BSEE", "BSIE", "BSME", "BSA" }));
 
         txtStudentNoUpd.setText("2022-");
 
         btnSearchUpd.setText("Search");
+        btnSearchUpd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSearchUpdActionPerformed(evt);
+            }
+        });
 
         btnUpdate.setText("Update");
+        btnUpdate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUpdateActionPerformed(evt);
+            }
+        });
+
+        spnrAgeUpd.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 1));
 
         javax.swing.GroupLayout updatePaneLayout = new javax.swing.GroupLayout(updatePane);
         updatePane.setLayout(updatePaneLayout);
@@ -537,7 +549,8 @@ public class StudentView extends javax.swing.JFrame {
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addGroup(updatePaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(cbProgramUpd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(txtAgeUpd, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                            .addComponent(spnrAgeUpd, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGap(90, 90, 90))))
                             .addComponent(txtStudentNoUpd))))
                 .addContainerGap(20, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, updatePaneLayout.createSequentialGroup()
@@ -572,7 +585,7 @@ public class StudentView extends javax.swing.JFrame {
                     .addComponent(jLabel17)
                     .addComponent(cbYearLevelUpd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel20)
-                    .addComponent(txtAgeUpd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(spnrAgeUpd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(updatePaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel18)
@@ -854,6 +867,79 @@ public class StudentView extends javax.swing.JFrame {
         txtSearchView.setText("");
     }//GEN-LAST:event_btnClearViewActionPerformed
 
+    private void btnSearchUpdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchUpdActionPerformed
+        int searchComp = 0;
+        String opt = cbViewOptUpd.getSelectedItem().toString();
+        String query = txtSearchUpd.getText();
+        String[] result = new String[7];
+        
+        if (opt.equals("Student no.")){
+            // For Input Validation
+             Pattern pattern = Pattern.compile("2022-\\d+");
+             Matcher m = pattern.matcher(query);
+             
+             if(m.matches()){
+                 String[] revQuery = query.split("-"); //2022-#             
+                 result = sc.searchStudent(opt, revQuery[1]);
+                 searchComp = 1;
+             } else {
+                 JOptionPane.showMessageDialog(null, "Invalid student number", "Input Error", JOptionPane.ERROR_MESSAGE);
+             }
+             
+        } else {
+            result = sc.searchStudent(opt, query);
+            searchComp = 1;
+        }
+        if(result[0] == null && searchComp == 1){
+           JOptionPane.showMessageDialog(null, "No Result", "Search Result", JOptionPane.INFORMATION_MESSAGE);
+           txtStudentNoUpd.setText("2022-");
+           txtFirstNameUpd.setText("");
+           txtLastNameUpd.setText("");
+           cbYearLevelUpd.setSelectedIndex(0);
+           spnrAgeUpd.setValue(0);
+           cbGenderUpd.setSelectedIndex(0);
+           cbProgramUpd.setSelectedIndex(0);
+        } else if (searchComp == 1){
+           txtStudentNoUpd.setText("2022-"+result[0]);
+           txtFirstNameUpd.setText(result[1]);
+           txtLastNameUpd.setText(result[2]);
+           cbYearLevelUpd.setSelectedItem(result[3]);
+           int age = Integer.parseInt(result[4]);
+           spnrAgeUpd.setValue(age);
+           cbGenderUpd.setSelectedItem(result[5]);
+           cbProgramUpd.setSelectedItem(result[6]);
+        }
+    }//GEN-LAST:event_btnSearchUpdActionPerformed
+
+    private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
+        if(txtFirstNameUpd.getText().isEmpty()){
+            JOptionPane.showMessageDialog(null, "Select a student", "Input error", JOptionPane.ERROR_MESSAGE);
+        } else {
+           int studentNo = Integer.parseInt(Arrays.asList(txtStudentNoUpd.getText().split("-")).get(1));
+           String firstName = txtFirstNameUpd.getText();
+           String lastName = txtLastNameUpd.getText();
+           int yearLevel = Integer.parseInt(cbYearLevelUpd.getSelectedItem().toString());
+           int age = (Integer)spnrAgeUpd.getValue();
+           String gender = cbGenderUpd.getSelectedItem().toString();
+           String program = cbProgramUpd.getSelectedItem().toString();
+           
+           if(sc.updateStudent(studentNo, firstName, lastName, yearLevel, age, gender, program)){
+                JOptionPane.showMessageDialog(null, "Update Successful", "Update", JOptionPane.INFORMATION_MESSAGE);
+                sc.loadData();
+                txtStudentNoUpd.setText("2022-");
+                txtFirstNameUpd.setText("");
+                txtLastNameUpd.setText("");
+                cbYearLevelUpd.setSelectedIndex(0);
+                spnrAgeUpd.setValue(0);
+                cbGenderUpd.setSelectedIndex(0);
+                cbProgramUpd.setSelectedIndex(0);
+           } else {
+               JOptionPane.showMessageDialog(null, "Update Failed", "Update", JOptionPane.ERROR_MESSAGE);
+           }
+           
+        }        
+    }//GEN-LAST:event_btnUpdateActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -958,8 +1044,8 @@ public class StudentView extends javax.swing.JFrame {
     private javax.swing.JTabbedPane mainPane;
     private javax.swing.JPanel searchPane;
     private javax.swing.JSpinner spnrAge;
+    private javax.swing.JSpinner spnrAgeUpd;
     private javax.swing.JLabel txtAgeDel;
-    private javax.swing.JTextField txtAgeUpd;
     private javax.swing.JLabel txtAgeView;
     private javax.swing.JTextField txtFirstName;
     private javax.swing.JLabel txtFirstNameDel;

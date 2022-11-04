@@ -647,8 +647,9 @@
                                               <EmptySpace min="34" max="32767" attributes="0"/>
                                               <Group type="103" groupAlignment="0" attributes="0">
                                                   <Component id="cbProgramUpd" min="-2" max="-2" attributes="0"/>
-                                                  <Component id="txtAgeUpd" min="-2" pref="190" max="-2" attributes="0"/>
+                                                  <Component id="spnrAgeUpd" min="-2" pref="100" max="-2" attributes="0"/>
                                               </Group>
+                                              <EmptySpace min="-2" pref="90" max="-2" attributes="0"/>
                                           </Group>
                                       </Group>
                                   </Group>
@@ -695,7 +696,7 @@
                           <Component id="jLabel17" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="cbYearLevelUpd" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel20" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="txtAgeUpd" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="spnrAgeUpd" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
@@ -719,13 +720,8 @@
             </Component>
             <Component class="javax.swing.JComboBox" name="cbViewOptUpd">
               <Properties>
-                <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                  <StringArray count="4">
-                    <StringItem index="0" value="Item 1"/>
-                    <StringItem index="1" value="Item 2"/>
-                    <StringItem index="2" value="Item 3"/>
-                    <StringItem index="3" value="Item 4"/>
-                  </StringArray>
+                <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="new javax.swing.DefaultComboBoxModel&lt;&gt;(new String[] { &quot;Student no.&quot;, &quot;Last name&quot; })" type="code"/>
                 </Property>
               </Properties>
               <AuxValues>
@@ -773,11 +769,12 @@
             <Component class="javax.swing.JComboBox" name="cbYearLevelUpd">
               <Properties>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                  <StringArray count="4">
-                    <StringItem index="0" value="Item 1"/>
-                    <StringItem index="1" value="Item 2"/>
-                    <StringItem index="2" value="Item 3"/>
-                    <StringItem index="3" value="Item 4"/>
+                  <StringArray count="5">
+                    <StringItem index="0" value="1"/>
+                    <StringItem index="1" value="2"/>
+                    <StringItem index="2" value="3"/>
+                    <StringItem index="3" value="4"/>
+                    <StringItem index="4" value="5"/>
                   </StringArray>
                 </Property>
               </Properties>
@@ -787,13 +784,8 @@
             </Component>
             <Component class="javax.swing.JComboBox" name="cbGenderUpd">
               <Properties>
-                <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                  <StringArray count="4">
-                    <StringItem index="0" value="Item 1"/>
-                    <StringItem index="1" value="Item 2"/>
-                    <StringItem index="2" value="Item 3"/>
-                    <StringItem index="3" value="Item 4"/>
-                  </StringArray>
+                <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="new javax.swing.DefaultComboBoxModel&lt;&gt;(new String[] { &quot;Female&quot;, &quot;Male&quot;, &quot;Non-binary&quot; })" type="code"/>
                 </Property>
               </Properties>
               <AuxValues>
@@ -805,8 +797,6 @@
                 <Property name="text" type="java.lang.String" value="Age"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="txtAgeUpd">
-            </Component>
             <Component class="javax.swing.JLabel" name="jLabel21">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Program"/>
@@ -814,13 +804,8 @@
             </Component>
             <Component class="javax.swing.JComboBox" name="cbProgramUpd">
               <Properties>
-                <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                  <StringArray count="4">
-                    <StringItem index="0" value="Item 1"/>
-                    <StringItem index="1" value="Item 2"/>
-                    <StringItem index="2" value="Item 3"/>
-                    <StringItem index="3" value="Item 4"/>
-                  </StringArray>
+                <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="new javax.swing.DefaultComboBoxModel&lt;&gt;(new String[] { &quot;BSCS&quot;, &quot;BSIS&quot;, &quot;BSIT&quot;, &quot;BSEMC&quot;, &quot;BSArch&quot;, &quot;BSChemE&quot;, &quot;BSCE&quot;, &quot;BSCpE&quot;, &quot;BSEE&quot;, &quot;BSIE&quot;, &quot;BSME&quot;, &quot;BSA&quot; })" type="code"/>
                 </Property>
               </Properties>
               <AuxValues>
@@ -836,10 +821,23 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Search"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSearchUpdActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="btnUpdate">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Update"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnUpdateActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JSpinner" name="spnrAgeUpd">
+              <Properties>
+                <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
+                  <SpinnerModel initial="0" minimum="0" numberType="java.lang.Integer" stepSize="1" type="number"/>
+                </Property>
               </Properties>
             </Component>
           </SubComponents>

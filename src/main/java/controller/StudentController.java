@@ -27,6 +27,7 @@ public class StudentController {
     private ArrayList<StudentModel> contents;
     private BufferedReader reader;
     private BufferedWriter writer;
+    private String header;
     private final int initStudentNo;  
     public int nextID;
 
@@ -47,10 +48,11 @@ public class StudentController {
             String line;
             int flag = 0;
             this.nextID = Integer.parseInt(new BufferedReader(new FileReader("resources/idCounter.txt")).readLine());
+            contents.clear();
             while((line = reader.readLine()) != null){
                 StudentModel entry = new StudentModel();
                 if (flag == 0){
-                    // Do nothing for header columns
+                    header = line;
                 } else {
                     String[] temp = line.split(",");                  
                     entry.setStudentNo(Integer.parseInt(temp[0]));    //student no.
@@ -179,6 +181,33 @@ public class StudentController {
             }
         } catch (IOException ex) {
             Logger.getLogger(StudentController.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        }  
     }
+
+
+    public boolean updateStudent(int studentNo, String firstName, String lastName, int yearLevel, int age, String gender, String program){
+        StudentModel studentToUpd = new StudentModel(studentNo, firstName, lastName, yearLevel, age, gender, program);
+        ArrayList<String> entries = new ArrayList<>();
+        entries.add(header);
+        
+        for(StudentModel student: contents){
+            if(student.getStudentNo() == studentToUpd.getStudentNo()){               
+                entries.add("\n" + studentToUpd.toFormattedCSVRow());     
+            } else {
+                entries.add("\n" + student.toFormattedCSVRow());               
+            }
+        }
+        try {
+            FileWriter studentsFile = new FileWriter("resources/student.csv");
+            try (BufferedWriter output = new BufferedWriter(studentsFile)) {
+               for(String entry: entries){
+                output.write(entry);
+                }
+               return true;
+            }
+        } catch (IOException ex) {
+            Logger.getLogger(StudentController.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
+        }     
+    }    
 }
