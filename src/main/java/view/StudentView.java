@@ -135,6 +135,7 @@ public class StudentView extends javax.swing.JFrame {
         jLabel52 = new javax.swing.JLabel();
         txtStudentNoDel = new javax.swing.JLabel();
         btnDelete = new javax.swing.JButton();
+        btnClearDel = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -673,6 +674,13 @@ public class StudentView extends javax.swing.JFrame {
             }
         });
 
+        btnClearDel.setText("Clear");
+        btnClearDel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnClearDelActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout deletePaneLayout = new javax.swing.GroupLayout(deletePane);
         deletePane.setLayout(deletePaneLayout);
         deletePaneLayout.setHorizontalGroup(
@@ -682,53 +690,56 @@ public class StudentView extends javax.swing.JFrame {
                 .addGap(15, 15, 15)
                 .addGroup(deletePaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(deletePaneLayout.createSequentialGroup()
-                        .addComponent(jLabel52)
-                        .addGap(18, 18, 18)
-                        .addComponent(txtStudentNoDel))
-                    .addGroup(deletePaneLayout.createSequentialGroup()
-                        .addComponent(jLabel37)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(cbViewOptDel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(30, 30, 30)
-                        .addComponent(jLabel38)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtSearchDel, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnSearchDel))
-                    .addComponent(jLabel39)
+                        .addComponent(btnClearDel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnDelete)
+                        .addGap(38, 38, 38))
                     .addGroup(deletePaneLayout.createSequentialGroup()
                         .addGroup(deletePaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel40)
-                            .addComponent(jLabel41)
-                            .addComponent(jLabel42))
-                        .addGroup(deletePaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(deletePaneLayout.createSequentialGroup()
-                                .addGap(24, 24, 24)
-                                .addComponent(txtFirstNameDel))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, deletePaneLayout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(deletePaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtYearLevelDel, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(txtGenderDel, javax.swing.GroupLayout.Alignment.TRAILING))))
-                        .addGap(123, 123, 123)
-                        .addGroup(deletePaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(deletePaneLayout.createSequentialGroup()
-                                .addComponent(jLabel45)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(txtProgramDel))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, deletePaneLayout.createSequentialGroup()
-                                .addComponent(jLabel44)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(txtAgeDel))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, deletePaneLayout.createSequentialGroup()
-                                .addComponent(jLabel43)
+                                .addComponent(jLabel52)
                                 .addGap(18, 18, 18)
-                                .addComponent(txtLastNameDel)))))
-                .addContainerGap(58, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, deletePaneLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnDelete)
-                .addGap(38, 38, 38))
+                                .addComponent(txtStudentNoDel))
+                            .addGroup(deletePaneLayout.createSequentialGroup()
+                                .addComponent(jLabel37)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(cbViewOptDel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(30, 30, 30)
+                                .addComponent(jLabel38)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtSearchDel, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnSearchDel))
+                            .addComponent(jLabel39)
+                            .addGroup(deletePaneLayout.createSequentialGroup()
+                                .addGroup(deletePaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel40)
+                                    .addComponent(jLabel41)
+                                    .addComponent(jLabel42))
+                                .addGroup(deletePaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(deletePaneLayout.createSequentialGroup()
+                                        .addGap(24, 24, 24)
+                                        .addComponent(txtFirstNameDel))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, deletePaneLayout.createSequentialGroup()
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addGroup(deletePaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(txtYearLevelDel, javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(txtGenderDel, javax.swing.GroupLayout.Alignment.TRAILING))))
+                                .addGap(123, 123, 123)
+                                .addGroup(deletePaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addGroup(deletePaneLayout.createSequentialGroup()
+                                        .addComponent(jLabel45)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(txtProgramDel))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, deletePaneLayout.createSequentialGroup()
+                                        .addComponent(jLabel44)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(txtAgeDel))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, deletePaneLayout.createSequentialGroup()
+                                        .addComponent(jLabel43)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(txtLastNameDel)))))
+                        .addContainerGap(58, Short.MAX_VALUE))))
         );
         deletePaneLayout.setVerticalGroup(
             deletePaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -767,7 +778,9 @@ public class StudentView extends javax.swing.JFrame {
                     .addComponent(txtGenderDel)
                     .addComponent(txtProgramDel))
                 .addGap(18, 18, 18)
-                .addComponent(btnDelete)
+                .addGroup(deletePaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnDelete)
+                    .addComponent(btnClearDel))
                 .addContainerGap(57, Short.MAX_VALUE))
         );
 
@@ -1130,6 +1143,16 @@ public class StudentView extends javax.swing.JFrame {
         txtLastNameUpd.setEditable(false);
     }//GEN-LAST:event_btnClearUpdActionPerformed
 
+    private void btnClearDelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearDelActionPerformed
+        txtStudentNoDel.setText("2022-");
+        txtFirstNameDel.setText("----------");
+        txtLastNameDel.setText("----------");
+        txtYearLevelDel.setText("----------");
+        txtAgeDel.setText("----------");
+        txtGenderDel.setText("----------");
+        txtProgramDel.setText("----------"); 
+    }//GEN-LAST:event_btnClearDelActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1169,6 +1192,7 @@ public class StudentView extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel addPane;
     private javax.swing.JButton btnAdd;
+    private javax.swing.JButton btnClearDel;
     private javax.swing.JButton btnClearSearch;
     private javax.swing.JButton btnClearUpd;
     private javax.swing.JButton btnClearView;
