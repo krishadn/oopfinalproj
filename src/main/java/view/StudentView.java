@@ -111,6 +111,7 @@ public class StudentView extends javax.swing.JFrame {
         btnSearchUpd = new javax.swing.JButton();
         btnUpdate = new javax.swing.JButton();
         spnrAgeUpd = new javax.swing.JSpinner();
+        btnClearUpd = new javax.swing.JButton();
         deletePane = new javax.swing.JPanel();
         jLabel37 = new javax.swing.JLabel();
         cbViewOptDel = new javax.swing.JComboBox<>();
@@ -515,6 +516,13 @@ public class StudentView extends javax.swing.JFrame {
 
         spnrAgeUpd.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 1));
 
+        btnClearUpd.setText("Clear");
+        btnClearUpd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnClearUpdActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout updatePaneLayout = new javax.swing.GroupLayout(updatePane);
         updatePane.setLayout(updatePaneLayout);
         updatePaneLayout.setHorizontalGroup(
@@ -536,33 +544,36 @@ public class StudentView extends javax.swing.JFrame {
                     .addGroup(updatePaneLayout.createSequentialGroup()
                         .addGap(20, 20, 20)
                         .addGroup(updatePaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel16)
-                            .addComponent(jLabel17)
-                            .addComponent(jLabel18)
-                            .addComponent(jLabel15))
-                        .addGap(30, 30, 30)
-                        .addGroup(updatePaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(updatePaneLayout.createSequentialGroup()
                                 .addGroup(updatePaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(cbYearLevelUpd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(cbGenderUpd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtFirstNameUpd, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(18, 18, 18)
-                                .addGroup(updatePaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, updatePaneLayout.createSequentialGroup()
-                                        .addComponent(jLabel19)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(txtLastNameUpd, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jLabel16)
+                                    .addComponent(jLabel17)
+                                    .addComponent(jLabel18)
+                                    .addComponent(jLabel15))
+                                .addGap(30, 30, 30)
+                                .addGroup(updatePaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(updatePaneLayout.createSequentialGroup()
                                         .addGroup(updatePaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel20)
-                                            .addComponent(jLabel21))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addGroup(updatePaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(cbProgramUpd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(spnrAgeUpd, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGap(90, 90, 90))))
-                            .addComponent(txtStudentNoUpd))))
+                                            .addComponent(cbYearLevelUpd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(cbGenderUpd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(txtFirstNameUpd, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGap(18, 18, 18)
+                                        .addGroup(updatePaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, updatePaneLayout.createSequentialGroup()
+                                                .addComponent(jLabel19)
+                                                .addGap(18, 18, 18)
+                                                .addComponent(txtLastNameUpd, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addGroup(updatePaneLayout.createSequentialGroup()
+                                                .addGroup(updatePaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                    .addComponent(jLabel20)
+                                                    .addComponent(jLabel21))
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                .addGroup(updatePaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                    .addComponent(cbProgramUpd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addComponent(spnrAgeUpd, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                .addGap(90, 90, 90))))
+                                    .addComponent(txtStudentNoUpd)))
+                            .addComponent(btnClearUpd))))
                 .addContainerGap(52, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, updatePaneLayout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
@@ -604,21 +615,28 @@ public class StudentView extends javax.swing.JFrame {
                     .addComponent(jLabel21)
                     .addComponent(cbProgramUpd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(btnUpdate)
+                .addGroup(updatePaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnUpdate)
+                    .addComponent(btnClearUpd))
                 .addContainerGap(62, Short.MAX_VALUE))
         );
 
         mainPane.addTab("Update Student", updatePane);
 
-        jLabel37.setText("View by");
+        jLabel37.setText("Search by");
 
-        cbViewOptDel.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbViewOptDel.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Student no.", "Last name" }));
 
         jLabel38.setText("Last name/Student no.");
 
         jLabel39.setText("Student details");
 
         btnSearchDel.setText("Search");
+        btnSearchDel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSearchDelActionPerformed(evt);
+            }
+        });
 
         jLabel40.setText("First name");
 
@@ -649,6 +667,11 @@ public class StudentView extends javax.swing.JFrame {
         txtStudentNoDel.setText("2022-");
 
         btnDelete.setText("Delete");
+        btnDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeleteActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout deletePaneLayout = new javax.swing.GroupLayout(deletePane);
         deletePane.setLayout(deletePaneLayout);
@@ -701,7 +724,7 @@ public class StudentView extends javax.swing.JFrame {
                                 .addComponent(jLabel43)
                                 .addGap(18, 18, 18)
                                 .addComponent(txtLastNameDel)))))
-                .addContainerGap(68, Short.MAX_VALUE))
+                .addContainerGap(58, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, deletePaneLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnDelete)
@@ -953,8 +976,8 @@ public class StudentView extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSearchUpdActionPerformed
 
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
-        if(txtFirstNameUpd.getText().isEmpty()){
-            JOptionPane.showMessageDialog(null, "Select a student", "Input error", JOptionPane.ERROR_MESSAGE);
+        if(txtFirstNameUpd.getText().isEmpty() || txtLastNameUpd.getText().isEmpty()){
+            JOptionPane.showMessageDialog(null, "No student selected / Fields cannot be empty", "Input error", JOptionPane.ERROR_MESSAGE);
         } else {
            int studentNo = Integer.parseInt(Arrays.asList(txtStudentNoUpd.getText().split("-")).get(1));
            String firstName = txtFirstNameUpd.getText();
@@ -1010,6 +1033,103 @@ public class StudentView extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(this, aboutMsg, "About", JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_aboutMenuItemActionPerformed
 
+    private void btnSearchDelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchDelActionPerformed
+        int searchComp = 0;
+        String opt = cbViewOptDel.getSelectedItem().toString();
+        String query = txtSearchDel.getText();
+        String[] result = new String[7];
+        
+        if (opt.equals("Student no.")){
+            // For Input Validation
+             Pattern pattern = Pattern.compile("2022-\\d+");
+             Matcher m = pattern.matcher(query);
+             
+            if(m.matches()){
+                String[] revQuery = query.split("-"); //2022-#             
+                result = sc.searchStudent(opt, revQuery[1]);
+                searchComp = 1;
+            } else {
+                JOptionPane.showMessageDialog(null, "Invalid student number", "Input Error", JOptionPane.ERROR_MESSAGE);
+                txtStudentNoDel.setText("2022-");
+                txtFirstNameDel.setText("----------");
+                txtLastNameDel.setText("----------");
+                txtYearLevelDel.setText("----------");
+                txtAgeDel.setText("----------");
+                txtGenderDel.setText("----------");
+                txtProgramDel.setText("----------");
+            }
+             
+        } else {
+            result = sc.searchStudent(opt, query);
+            searchComp = 1;
+        }
+        if(result[0] == null && searchComp == 1){
+            JOptionPane.showMessageDialog(null, "No Result", "Search Result", JOptionPane.INFORMATION_MESSAGE);
+            txtStudentNoDel.setText("2022-");
+            txtFirstNameDel.setText("----------");
+            txtLastNameDel.setText("----------");
+            txtYearLevelDel.setText("----------");
+            txtAgeDel.setText("----------");
+            txtGenderDel.setText("----------");
+            txtProgramDel.setText("----------");
+        } else if (searchComp == 1){
+            txtStudentNoDel.setText("2022-"+result[0]);
+            txtFirstNameDel.setText(result[1]);
+            txtLastNameDel.setText(result[2]);
+            txtYearLevelDel.setText(result[3]);
+            txtAgeDel.setText(result[4]);
+            txtGenderDel.setText(result[5]);
+            txtProgramDel.setText(result[6]);
+        }
+    }//GEN-LAST:event_btnSearchDelActionPerformed
+
+    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
+        if(txtFirstNameDel.getText().equals("----------") || txtLastNameDel.getText().equals("----------")){
+            JOptionPane.showMessageDialog(null, "No student selected", "Input error", JOptionPane.ERROR_MESSAGE);
+	} else {
+            int confirm = JOptionPane.showConfirmDialog(null, "Confirm deletion?");
+            if(confirm == 0){
+                int studentNo = Integer.parseInt(Arrays.asList(txtStudentNoDel.getText().split("-")).get(1));
+                if (sc.deleteStudent(studentNo)){
+                    JOptionPane.showMessageDialog(null, "Deleted Student Record", "Update", JOptionPane.INFORMATION_MESSAGE);
+                    txtStudentNoDel.setText("2022-");
+                    txtFirstNameDel.setText("----------");
+                    txtLastNameDel.setText("----------");
+                    txtYearLevelDel.setText("----------");
+                    txtAgeDel.setText("----------");
+                    txtGenderDel.setText("----------");
+                    txtProgramDel.setText("----------");
+                    sc.loadData();
+                } else {
+                    JOptionPane.showMessageDialog(null, "An error occurred. Operation failed", "Error", JOptionPane.ERROR_MESSAGE);
+
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "Retained student record", "Update", JOptionPane.INFORMATION_MESSAGE);
+                txtStudentNoDel.setText("2022-");
+                txtFirstNameDel.setText("----------");
+                txtLastNameDel.setText("----------");
+                txtYearLevelDel.setText("----------");
+                txtAgeDel.setText("----------");
+                txtGenderDel.setText("----------");
+                txtProgramDel.setText("----------");                
+            }
+            
+        }
+    }//GEN-LAST:event_btnDeleteActionPerformed
+
+    private void btnClearUpdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearUpdActionPerformed
+        txtStudentNoUpd.setText("2022-");
+        txtFirstNameUpd.setText("");
+        txtLastNameUpd.setText("");
+        cbYearLevelUpd.setSelectedIndex(0);
+        spnrAgeUpd.setValue(0);
+        cbGenderUpd.setSelectedIndex(0);
+        cbProgramUpd.setSelectedIndex(0);
+        txtFirstNameUpd.setEditable(false);
+        txtLastNameUpd.setEditable(false);
+    }//GEN-LAST:event_btnClearUpdActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1050,6 +1170,7 @@ public class StudentView extends javax.swing.JFrame {
     private javax.swing.JPanel addPane;
     private javax.swing.JButton btnAdd;
     private javax.swing.JButton btnClearSearch;
+    private javax.swing.JButton btnClearUpd;
     private javax.swing.JButton btnClearView;
     private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnSearchDel;
