@@ -209,32 +209,5 @@ public class StudentController {
             Logger.getLogger(StudentController.class.getName()).log(Level.SEVERE, null, ex);
             return false;
         }     
-    }
-
-
-    public boolean updateStudent(int studentNo, String firstName, String lastName, int yearLevel, int age, String gender, String program){
-        StudentModel studentToUpd = new StudentModel(studentNo, firstName, lastName, yearLevel, age, gender, program);
-        ArrayList<String> entries = new ArrayList<>();
-        entries.add(header);
-        
-        for(StudentModel student: contents){
-            if(student.getStudentNo() == studentToUpd.getStudentNo()){               
-                entries.add("\n" + studentToUpd.toFormattedCSVRow());     
-            } else {
-                entries.add("\n" + student.toFormattedCSVRow());               
-            }
-        }
-        try {
-            FileWriter studentsFile = new FileWriter("resources/student.csv");
-            try (BufferedWriter output = new BufferedWriter(studentsFile)) {
-               for(String entry: entries){
-                output.write(entry);
-                }
-               return true;
-            }
-        } catch (IOException ex) {
-            Logger.getLogger(StudentController.class.getName()).log(Level.SEVERE, null, ex);
-            return false;
-        }     
     }    
 }
