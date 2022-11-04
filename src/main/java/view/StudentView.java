@@ -474,7 +474,11 @@ public class StudentView extends javax.swing.JFrame {
 
         jLabel18.setText("Gender");
 
+        txtFirstNameUpd.setEditable(false);
+
         jLabel19.setText("Last name");
+
+        txtLastNameUpd.setEditable(false);
 
         cbYearLevelUpd.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5" }));
 
@@ -908,6 +912,8 @@ public class StudentView extends javax.swing.JFrame {
            spnrAgeUpd.setValue(age);
            cbGenderUpd.setSelectedItem(result[5]);
            cbProgramUpd.setSelectedItem(result[6]);
+           txtFirstNameUpd.setEditable(true);
+           txtLastNameUpd.setEditable(true);
         }
     }//GEN-LAST:event_btnSearchUpdActionPerformed
 
@@ -933,6 +939,8 @@ public class StudentView extends javax.swing.JFrame {
                 spnrAgeUpd.setValue(0);
                 cbGenderUpd.setSelectedIndex(0);
                 cbProgramUpd.setSelectedIndex(0);
+                txtFirstNameUpd.setEditable(false);
+                txtLastNameUpd.setEditable(false);
            } else {
                JOptionPane.showMessageDialog(null, "Update Failed", "Update", JOptionPane.ERROR_MESSAGE);
            }
